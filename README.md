@@ -1,9 +1,9 @@
 # Introductie HTML / CSS / PHP als basis voor een Webshop
 
-HTML is de opmaak taal van het internet. Het is een vrij uitgebreid systeem van stuur-codes om een webpagina op een bepaalde manier te tonen. Anders dan layout, zit er geen functionaliteit in HTML.  
-HTML is vrij uitgebreid en je zult gaandeweg je loopbaan nieuwe dingen leren toepassen en met nieuwe versie moeten gaan werken. 
+HTML is de opmaaktaal van het internet. Het is een vrij uitgebreid systeem van stuur-codes om een webpagina op een bepaalde manier te tonen.. Anders dan layout, zit er geen functionaliteit in HTML.  
+HTML is vrij uitgebreid en je zult gaandeweg je loopbaan nieuwe dingen leren toepassen en met nieuwe versies moeten gaan werken. 
  
-Rond versie 3 van HTML realizeerde mensen dat de web environments groter en meer complex werden is het idee ontstaan om de styling van de elementen lost te koppelen van de HTML in een los style document dat later CSS werd. 
+Rond versie 3 van HTML realiseerden mensen zich dat de web environments groter en complexer werden en is het idee ontstaan om de styling van de elementen lost te koppelen van de HTML in een los style document dat later CSS werd. 
 
 CSS staat voor “Cascading Style Sheets”, waar het “style sheet”-onderdeel daar is om de style van de elementen te definieren en het “cascading” deel verwijst naar het overerven van style eigenschappen. e.g. Als je bijv een `<div>` een style geeft, zullen automatisch alle kinderen van deze `<div>` dezelfde style ontvangen, daarnaast kan je voor een groep elementen een style definieren en dan voor een specifiek element een uitzondering maken.
 
