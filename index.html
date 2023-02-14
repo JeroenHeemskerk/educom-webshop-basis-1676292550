@@ -40,9 +40,15 @@ td:nth-child(even),th:nth-child(odd) {
 }
 form { margin: 5px;}
 </style>
-<body>
-
+<header>
 <h1 id="top" style="font-size:300%; text-align:center;">Random stuff</h1>
+</header>
+<body>
+<ul>
+    <a href="index.html"><li>HOME</li></a>
+    <a href="about.html"><li>ABOUT</li></a>
+    <a href="contact.html"><li>CONTACT</li></a>
+    </ul>
 <hr>
 <h2 style="color:#FFFF33;">All this stuff is just to practice</h2>
 <h3><del>And practice some more</del></h3>
@@ -87,11 +93,6 @@ One that we build with every command.
     <td>C1</td>
   </tr>
 </table>
-<ul style="list-style-type:square;">
-  <li>Java</li>
-  <li>JavaScript</li>
-  <li>PHP</li>
-</ul>
 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" onclick="areYouSure()" style="border:5px solid black;"><!-- You can replace this with your own favorite youtube video -->This is an interesting link, please click</a>
 <br>
 <br>
@@ -109,6 +110,11 @@ One that we build with every command.
 </form>
 <a href="mailto:lvangammeren@gmail.com">You can e-mail me!</a>
 <a href="#top">Scroll back to top</a>
+<br>
+<br>
+<footer style="text-align:center;">
+<p>&copy; <script>document.write(new Date().getFullYear())</script> Lydia van Gammeren All Rights Reserved</p>
+</footer>
 <script>
 function areYouSure() {
   alert("Are you sure you want to see this?");
