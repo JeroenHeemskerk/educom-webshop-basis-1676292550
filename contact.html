@@ -2,6 +2,7 @@
 <html lang=en>
 <head>
 <title>HOME</title>
+<link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/x-icon" href="C:\xampp\htdocs\educom-webshop-basis-1676292550\favicon.ico">
 </head>
 <body>
@@ -10,6 +11,29 @@
     <a href="about.html"><li>ABOUT</li></a>
     <a href="contact.html"><li>CONTACT</li></a>
 </ul>
+<div class="form-style-3">
+<form>
+<fieldset><legend>Personal</legend>
+<label for="field1"><span>Name <span class="required">*</span></span><input type="text" class="input-field" name="field1" value="" /></label>
+<label for="field2"><span>Email <span class="required">*</span></span><input type="email" class="input-field" name="field2" value="" /></label>
+<label for="field3"><span>Phone <span class="required">*</span></span><input type="text" class="input-field" name="field3" value="" /></label>
+<label for="field4"><span>How can we address you?</span><select name="field4" class="select-field">
+<option value="Mrs">Mrs</option>
+<option value="Ms">Ms</option>
+<option value="Mx">Mx</option>
+<option value="Mr">Mr</option>
+</select></label>
+</fieldset>
+<fieldset><legend>Preferred contact option:</legend>
+<label for="email"><span>email</span><input type="radio" id="email" name="contact" value="email"></label><br>
+<label for="phone"><span>phone</span><input type="radio" id="phone" name="contact" value="phone"></label><br>
+</fieldset>
+<fieldset><legend>How can I help you?</legend>
+<label for="field6"><span>Message <span class="required">*</span></span><textarea name="field6" class="textarea-field"></textarea></label>
+<label><span> </span><input type="submit" value="Submit" /></label>
+</fieldset>
+</form>
+</div>
 <footer style="text-align:center;">
 <p>&copy; <script>document.write(new Date().getFullYear())</script> Lydia van Gammeren All Rights Reserved</p>
 </footer>
