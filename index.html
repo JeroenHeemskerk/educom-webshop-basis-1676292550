@@ -5,21 +5,24 @@
 <link rel="stylesheet" href="style.css">
 <link rel="icon" type="image/x-icon" href="C:\xampp\htdocs\educom-webshop-basis-1676292550\favicon.ico">
 </head>
-<header>
-<h1 id="top" style="font-size:300%; text-align:center;">Random stuff</h1>
-</header>
 <body>
-<ul>
+<header>
+<h1>Random stuff</h1>
+</header>
+<ul class="menu">
     <a href="index.html"><li>HOME</li></a>
     <a href="about.html"><li>ABOUT</li></a>
     <a href="contact.html"><li>CONTACT</li></a>
 </ul>
 <hr>
-<h2 style="color:#FFFF33;">All this stuff is just to practice</h2>
+<div class="introduction">
+<h2>All this stuff is just to practice</h2>
 <h3><del>And practice some more</del></h3>
-<p title="Yes, really!" style="font-family:courier;">This is all <strong>really</strong> random</p>
+<p title="Yes, really!">This is all <strong>really</strong> random</p>
 <p> But anyway, welcome to my site!</p> 
-<p><span style="color:rgb(255, 99, 71); background-color: white">This is a poem about programming made by <abbr title="generative pre-trained transformer"><i>ChatGPT</i></abbr>:<span></p>
+</div>
+<div class="poem">
+<p><span>This is a poem about programming made by <abbr title="generative pre-trained transformer"><i>ChatGPT</i></abbr>:<span></p>
 <pre>
 In lines of code and endless <sub>loops</sub>,
 A world of logic and rules we group.
@@ -46,6 +49,8 @@ And revel in its wondrous abode.
 For it's the pathway to a world beyond,
 One that we build with every command.
 </pre>
+</div>
+<div class="languages">
 <table>
 <caption>My languages:</caption>
   <tr>
@@ -59,7 +64,9 @@ One that we build with every command.
     <td>C1</td>
   </tr>
 </table>
-<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" onclick="areYouSure()" style="border:5px solid black;"><!-- You can replace this with your own favorite youtube video -->This is an interesting link, please click</a>
+</div>
+<div class="miscellaneous">
+<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" onclick="areYouSure()"><!-- You can replace this with your own favorite youtube video -->This is an interesting link, please click</a>
 <br>
 <br>
 <img src="https://t4.ftcdn.net/jpg/02/66/72/41/240_F_266724172_Iy8gdKgMa7XmrhYYxLCxyhx6J7070Pr8.jpg" alt="cat with stretched paw">
@@ -71,7 +78,8 @@ One that we build with every command.
 <a href="#top">Scroll back to top</a>
 <br>
 <br>
-<footer style="text-align:center;">
+</div>
+<footer>
 <p>&copy; <script>document.write(new Date().getFullYear())</script> Lydia van Gammeren All Rights Reserved</p>
 </footer>
 <script>

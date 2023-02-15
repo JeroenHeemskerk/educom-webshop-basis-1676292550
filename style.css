@@ -7,6 +7,10 @@ body {
 	background-attachment: fixed;
 	background-size: 100% 100%;
 }
+header h1 {
+	font-size:300%; 
+	text-align:center;
+}
 p {
 	color: #EB3B88; 
 	padding-bottom: 20px;
@@ -126,8 +130,26 @@ td:nth-child(even),th:nth-child(odd) {
 	font-weight:normal;
 }
 
+.introduction h2 {
+	color:#FFFF33;
+}
+
+.introduction p {
+	font-family:courier;
+}
+
+.poem p span {
+	color:rgb(255, 99, 71); 
+	background-color: white;
+}
+
+.miscellaneous a {
+	border:5px solid black;
+}
+
 footer{
     margin-top: auto;
+	text-align:center;
 }
 
 
