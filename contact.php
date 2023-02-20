@@ -4,7 +4,7 @@
 <head>
   <title>CONTACT</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/x-icon" href="C:\xampp\htdocs\educom-webshop-basis-1676292550\favicon.ico">
+  <link rel="icon" type="image/x-icon" href="C:\xampp\htdocs\educom-webshop-basis\favicon.ico">
 </head>
 
 <body>
@@ -79,13 +79,13 @@
         <br>
         <nav>
           <ul class="menu">
-            <a href="index.html">
+            <a href="index.php">
               <li>HOME</li>
             </a>
-            <a href="about.html">
+            <a href="about.php">
               <li>ABOUT</li>
             </a>
-            <a href="contact.html">
+            <a href="contact.php">
               <li>CONTACT</li>
             </a>
           </ul>
