@@ -1,108 +1,126 @@
-<!DOCTYPE html>
-<html lang="en">
+<?PHP
 
-<head>
-  <title>HOME</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/x-icon" href="C:\xampp\htdocs\educom-webshop-basis\favicon.ico">
-</head>
+// =================================================================
+// Main App
+// =================================================================
 
-<body>
-  <div id="page-container">
-    <div id="content-wrap">
-      <header>
-        <h1>HOME</h1>
-      </header>
-      <nav>
-        <ul class="menu">
-          <a href="index.php">
-            <li>HOME</li>
-          </a>
-          <a href="about.php">
-            <li>ABOUT</li>
-          </a>
-          <a href="contact.php">
-            <li>CONTACT</li>
-          </a>
-        </ul>
-      </nav>
-      <hr>
-      <div class="introduction">
-        <h2>All this stuff is just to practice</h2>
-        <h3><del>And practice some more</del></h3>
-        <p title="Yes, really!">This is all <strong>really</strong> random</p>
-        <p> But anyway, welcome to my site!</p>
-      </div>
-      <div class="poem">
-        <p><span>This is a poem about programming made by <abbr title="generative pre-trained transformer"><i>ChatGPT</i></abbr>:<span></p>
-        <pre>
-In lines of code and endless <sub>loops</sub>,
-A world of logic and rules we group.
-With keyboard clicks and mousepad scrolls,
-We bring ideas to life, from abstract goals.
+$page = getRequestedPage();
+showResponsePage($page);
 
-Our minds decipher lines of text,
-Seeking <sup>errors</sup> that cause defects.
-We build solutions, one step at a time,
-Asking the computer to execute our design.
+// =================================================================
+// Functions
+// =================================================================
 
-In languages foreign to the common ear,
-We communicate with the machine, crystal clear.
-We give commands, and it follows our lead,
-Transforming our thoughts into something concrete.
+function getRequestedPage()
+{
+    $request_type = $_SERVER['REQUEST_METHOD'];
 
-Programming, a craft that builds the future,
-Powering machines that bring us nurture.
-It's an art, a science, a way of life,
-A journey of discovery, of learning and strife.
-
-So let's embrace the beauty of code,
-And revel in its wondrous abode.
-For it's the pathway to a world beyond,
-One that we build with every command.
-</pre>
-      </div>
-      <div class="languages">
-        <table class="center">
-          <caption>My languages:</caption>
-          <tr>
-            <th>Dutch</td>
-            <th>English</td>
-            <th>Chinese</td>
-          </tr>
-          <tr>
-            <td>C2</td>
-            <td>C1</td>
-            <td>C1</td>
-          </tr>
-        </table>
-      </div>
-      <div class="miscellaneous">
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" onclick="areYouSure()"><!-- You can replace this with your own favorite youtube video -->This is an interesting link, please click</a>
-        <br>
-        <br>
-        <img src="https://t4.ftcdn.net/jpg/02/66/72/41/240_F_266724172_Iy8gdKgMa7XmrhYYxLCxyhx6J7070Pr8.jpg" alt="cat with stretched paw">
-        <p><q>Just do it!</q> - says kitty</p>
-        <bdo title="This is Bi-Directional Override" dir="rtl">p.s. can you read this super secret code?</bdo>
-        <br>
-        <br>
-        <a href="mailto:lvangammeren@gmail.com">You can e-mail me!</a>
-        <a href="#top">Scroll back to top</a>
-        <br>
-        <br>
-      </div>
-      <footer>
-        <p>&copy; <script>
-            document.write(new Date().getFullYear())
-          </script> Lydia van Gammeren All Rights Reserved</p>
-    </div>
-    </footer>
-  </div>
-  <script>
-    function areYouSure() {
-      alert("Are you sure you want to see this?");
+    if ($request_type == 'POST') {
+        $requested_page = getPostVar('page', 'home');
+    } else if ($request_type == 'GET') {
+        $requested_page = getUrlVar('page', 'home');
     }
-  </script>
-</body>
+    return $requested_page;
+}
 
-</html>
+function showResponsePage($page)
+{
+    beginDocument();
+    showHeadSection($page);
+    showBodySection($page);
+    endDocument();
+}
+
+function getPostVar($key, $default = '')
+{
+    $value = filter_input(INPUT_POST, $key);
+    return isset($value) ? $value : $default;
+}
+
+function getUrlVar($key, $default = '')
+{
+    $value = filter_input(INPUT_GET, $key);
+    return isset($value) ? $value : $default;
+}
+
+function beginDocument()
+{
+    echo '<!doctype html> 
+<html>';
+}
+
+function showHeadSection($page)
+{
+
+    echo '<head>
+    <title>' . $page . '</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="C:\xampp\htdocs\educom-webshop-basis\favicon.ico">
+  </head>';
+}
+
+function showBodySection($page)
+{
+    echo '    <body>' . PHP_EOL;
+    showHeader($page);
+    showMenu();
+    showContent($page);
+    showFooter();
+    echo '    </body>' . PHP_EOL;
+}
+
+function endDocument()
+{
+    echo  '</html>';
+}
+
+function showHeader($page)
+{
+    echo '<header>
+    <h1>' . $page . '</h1>
+  </header>';
+}
+
+function showMenu()
+{
+    echo '<nav>
+    <ul class="menu">
+    <a href="index.php?page=home>
+            <li>HOME</li>
+        </a>
+        <a href="index.php?page=about>
+            <li>ABOUT</li>
+        </a>
+        <a href="index.php?page=contact>
+            <li>CONTACT</li>
+        </a>
+    </ul>
+</nav>';
+}
+
+function showContent($page)
+{
+    switch ($page) {
+        case 'home':
+            require('home.php');
+            showHomeContent();
+            break;
+        case 'about':
+            require('about.php');
+            showAboutContent();
+            break;
+        case 'contact':
+            require('contact.php');
+            showContactContent();
+    }
+}
+
+function showFooter()
+{
+    echo '
+    <footer>
+    <p>&copy; <script>
+        document.write(new Date().getFullYear())
+      </script> Lydia van Gammeren All Rights Reserved</p>
+  </footer>';
+}
