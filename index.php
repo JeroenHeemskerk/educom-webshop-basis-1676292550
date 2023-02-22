@@ -83,6 +83,7 @@ function showHeader($page)
         case 'home':
         case 'about':
         case 'contact':
+        case 'register':
             echo '<header>
         <h1>' . strtoupper($page) . '</h1>
       </header>';
@@ -102,14 +103,13 @@ function showMenu()
     </a>
     <a href="index.php?page=about">
     <li>ABOUT</li>
-    </a>
-    
+    </a>    
     <a href="index.php?page=contact">
-    <li>
-            CONTACT
-            </li> 
-        </a>
-        
+    <li>CONTACT</li> 
+    </a>   
+    <a href="index.php?page=register">
+    <li>REGISTER</li> 
+    </a>        
     </ul>
 </nav>';
 }
@@ -128,6 +128,10 @@ function showContent($page)
         case 'contact':
             require('contact.php');
             showContactContent();
+            break;
+        case 'register':
+            require('register.php');
+            showRegisterContent();
             break;
         default:
             echo '<h1>This page does not exist</h1>';
