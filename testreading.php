@@ -1,5 +1,4 @@
 <?php
-$myfile = fopen("Users/users.txt", "a") or die("Unable to open file!");
-$txt = "John Doe\n";
-fwrite($myfile, $txt);
+$myfile = fopen("Users/users.txt", "r") or die("Unable to open file!");
+echo fread($myfile, filesize("Users/users.txt"));
 fclose($myfile);

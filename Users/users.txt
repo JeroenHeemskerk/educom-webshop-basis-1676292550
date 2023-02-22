@@ -1,2 +1,5 @@
 [email]|[naam]|[wachtwoord]
 coach@man-kind.nl|Geert Weggemans|halt!
+lvangammeren@gmail.com|Lydia van Gammeren|123
+b@email.com|Lydia van Gammeren|Katf.pD.X!vv5
+test@test.nl|Testpersoon|123

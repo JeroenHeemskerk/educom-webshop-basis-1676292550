@@ -2,8 +2,8 @@
 function showRegisterContent()
 {
     // initate the variables 
-    $name = $email = $password = $repeatPassword = '';
-    $nameErr = $emailErr = $passwordErr = $repeatPasswordErr = '';
+    $name = $email = $password = $confirmPassword = '';
+    $nameErr = $emailErr = $passwordErr = $confirmPasswordErr = '';
     $valid = false;
 
     function test_input($data)
@@ -40,18 +40,40 @@ function showRegisterContent()
             $password = test_input($_POST["password"]);
         }
 
-        if (empty($_POST["repeatPassword"])) {
-            $repeatPasswordErr = "Repeat your password";
+        if (empty($_POST["confirmPassword"])) {
+            $confirmPasswordErr = "Please repeat your password";
         } else {
-            $repeatPassword = test_input($_POST["repeatPassword"]);
-            if (strcmp($repeatPassword, $password) != 0) {
-                $repeatPasswordErr = "Passwords does not match";
+            $confirmPassword = test_input($_POST["confirmPassword"]);
+            if (strcmp($confirmPassword, $password) != 0) {
+                $confirmPasswordErr = "Passwords does not match";
             }
         }
 
-        if (strcmp($nameErr, '') == 0 && strcmp($emailErr, '') == 0 && strcmp($passwordErr, '') == 0 && strcmp($repeatPasswordErr, '') == 0) {
-            $valid = true;
-        };
+        if ($name !== "" && $email !== "" && $password !== "" && $confirmPassword !== "" && $nameErr === "" && $emailErr === "" && $passwordErr === "" && $confirmPasswordErr === "") {
+            $users_file = fopen("./users/users.txt", "r");
+            while (!feof($users_file)) {
+                $user = fgets($users_file);
+                if (stripos(
+                    $user,
+                    $email
+                ) !== false) {
+                    $emailErr = "An account with this email is already in use";
+                }
+            }
+            fclose($users_file);
+
+            if ($emailErr === "") {
+                $valid = true;
+
+                $users_file = fopen("./users/users.txt", "a");
+                $new_user = "$email|$name|$password\n";
+                fwrite(
+                    $users_file,
+                    $new_user
+                );
+                fclose($users_file);
+            }
+        }
     }
 
     if (!$valid) { /* Show the next part only when $valid is false */
@@ -66,8 +88,8 @@ function showRegisterContent()
               <span class="error">' . $emailErr . '</span>
               <label for="password"><span class="required">Password*</span><input type="password" class="input-field" name="password" value="' . $password . '" /></label>
               <span class="error">' . $passwordErr . '</span>
-              <label for="repeatPassword"><span class="required">Repeat Password*</span><input type="password" class="input-field" name="repeatPassword" value="' . $repeatPassword . '" /></label>
-              <span class="error">' . $repeatPasswordErr . '</span>
+              <label for="confirmPassword"><span class="required">Confirm Password*</span><input type="password" class="input-field" name="confirmPassword" value="' . $confirmPassword . '" /></label>
+              <span class="error">' . $confirmPasswordErr . '</span>
             </fieldset>      
             <fieldset>              
               <label><input type="submit" value="Submit" /></label>
@@ -77,12 +99,10 @@ function showRegisterContent()
         </div>'
 ?> <?php } else { /* Show the next part only when $valid is true */
         echo '
-        <p>Thank you for your reply!</p>
-
+        <p>Your registration is complete!</p>
+        <p>Account info: </p>
         <div>Name: ' . $name . '</div>
-        <div>Email: ' . $email . ' </div>
-        <div>Password: ' . $password . '</div>
-        <div>Repeated password: ' . $repeatPassword . '</div>                
+        <div>Email: ' . $email . ' </div>                     
     </div> ';
     }
 }
