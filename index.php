@@ -4,6 +4,8 @@
 // Main App
 // =================================================================
 
+session_start();
+include 'validations.php';
 $page = getRequestedPage();
 showResponsePage($page);
 
@@ -84,6 +86,7 @@ function showHeader($page)
         case 'about':
         case 'contact':
         case 'register':
+        case 'login':
             echo '<header>
         <h1>' . strtoupper($page) . '</h1>
       </header>';
@@ -109,7 +112,10 @@ function showMenu()
     </a>   
     <a href="index.php?page=register">
     <li>REGISTER</li> 
-    </a>        
+    </a>  
+    <a href="index.php?page=login">
+    <li>LOGIN</li> 
+    </a>       
     </ul>
 </nav>';
 }
@@ -127,11 +133,30 @@ function showContent($page)
             break;
         case 'contact':
             require('contact.php');
-            showContactContent();
+            $data = validateContact();
+            showContactContent($data);
             break;
         case 'register':
             require('register.php');
-            showRegisterContent();
+            $data = validateRegistration();
+            showRegisterContent($data);
+            if ($data['valid'] === true) {
+                $page = 'login';
+            }
+            break;
+            break;
+        case 'login':
+            require('login.php');
+            $data = validateLogin();
+            showLoginContent($data);
+            if ($data['valid'] === true) {
+                logUserIn($data);
+                $page = 'home';
+            }
+            break;
+        case 'logout':
+            logUserOut();
+            $page = 'home';
             break;
         default:
             echo '<h1>This page does not exist</h1>';
@@ -153,4 +178,18 @@ function showFooter()
 function endDocument()
 {
     echo  '</html>';
+}
+
+// =================================================================
+// Session
+// =================================================================
+
+function logUserIn($data)
+{
+    $_SESSION['username'] = $data['name'];
+}
+
+function logUserOut()
+{
+    session_unset();
 }
