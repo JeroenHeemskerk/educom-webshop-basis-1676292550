@@ -1,5 +1,5 @@
 <?php
-function showLoginContent($data)
+function showContent($data)
 {
     echo '
         <div class="form-style-3">

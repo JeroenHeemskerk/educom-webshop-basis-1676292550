@@ -6,8 +6,10 @@
 
 session_start();
 include 'validations.php';
+include 'session_manager.php';
 $page = getRequestedPage();
-showResponsePage($page);
+$data = processRequest($page);
+showResponsePage($data);
 
 // =================================================================
 // Functions
@@ -25,14 +27,6 @@ function getRequestedPage()
     return $requested_page;
 }
 
-function showResponsePage($page)
-{
-    beginDocument();
-    showHeadSection($page);
-    showBodySection($page);
-    endDocument();
-}
-
 function getPostVar($key, $default = '')
 {
     $value = filter_input(INPUT_POST, $key);
@@ -45,10 +39,69 @@ function getUrlVar($key, $default = '')
     return isset($value) ? $value : $default;
 }
 
+function processRequest($page)
+{
+
+    switch ($page) {
+        case 'home':
+            $page = 'home';
+            break;
+        case 'about':
+            $page = 'about';
+            break;
+        case 'contact':
+            $data = validateContact();
+            if ($data['valid']) {
+                $page = 'contact';
+            }
+            break;
+        case 'register':
+            $data = validateRegistration();
+            if ($data['valid']) {
+                $page = 'login';
+            }
+            break;
+        case 'login':
+            $data = validateLogin();
+            if ($data['valid']) {
+                logUserIn($data);
+                $page = 'home';
+            }
+            break;
+        case 'logout':
+            logUserOut();
+            $page = 'home';
+            break;
+        default:
+            $page = 'unknown';
+    }
+    $data['page'] = $page;
+    return $data;
+}
+function showResponsePage($data)
+{
+    $current_page = $data['page'];
+    if ($current_page !== 'unknown') {
+        include "$current_page.php";
+    }
+
+    beginDocument();
+    showHeadSection($current_page);
+
+    if ($current_page !== 'unknown') {
+        showBody($current_page, $data);
+    } else {
+        echo 'No such page.';
+    }
+
+    endDocument();
+}
+
+
 function beginDocument()
 {
     echo '<!doctype html> 
-<html>';
+              <html>';
 }
 
 function showHeadSection($page)
@@ -64,19 +117,23 @@ function showHeadSection($page)
 // =================================================================
 // Functions for Body
 // =================================================================
-
-function showBodySection($page)
+function showBody($current_page, $data)
 {
+    showBodyStart();
+    showHeader($current_page);
+    showMenu($data);
+    showContent($data);
+    showFooter();
+    showBodyEnd();
+}
+
+
+function showBodyStart()
+{
+
     echo '    <body>' . PHP_EOL;
     echo '<div id="page-container">
     <div id="content-wrap">' . PHP_EOL;
-    showHeader($page);
-    showMenu();
-    showContent($page);
-    echo ' </div>' . PHP_EOL;
-    showFooter();
-    echo '</div>' . PHP_EOL;
-    echo '    </body>' . PHP_EOL;
 }
 
 function showHeader($page)
@@ -120,52 +177,10 @@ function showMenu()
 </nav>';
 }
 
-function showContent($page)
-{
-    switch ($page) {
-        case 'home':
-            require('home.php');
-            showHomeContent();
-            break;
-        case 'about':
-            require('about.php');
-            showAboutContent();
-            break;
-        case 'contact':
-            require('contact.php');
-            $data = validateContact();
-            showContactContent($data);
-            break;
-        case 'register':
-            require('register.php');
-            $data = validateRegistration();
-            showRegisterContent($data);
-            if ($data['valid'] === true) {
-                $page = 'login';
-            }
-            break;
-            break;
-        case 'login':
-            require('login.php');
-            $data = validateLogin();
-            showLoginContent($data);
-            if ($data['valid'] === true) {
-                logUserIn($data);
-                $page = 'home';
-            }
-            break;
-        case 'logout':
-            logUserOut();
-            $page = 'home';
-            break;
-        default:
-            echo '<h1>This page does not exist</h1>';
-    }
-}
-
 function showFooter()
 {
     echo '
+    </div>
     <footer>
     <p>&copy; <script>
         document.write(new Date().getFullYear())
@@ -173,23 +188,17 @@ function showFooter()
   </footer>';
 }
 
+function showBodyEnd()
+{
+    echo '</div>' . PHP_EOL;
+    echo '    </body>' . PHP_EOL;
+}
+
+
+
 // =================================================================
 
 function endDocument()
 {
     echo  '</html>';
-}
-
-// =================================================================
-// Session
-// =================================================================
-
-function logUserIn($data)
-{
-    $_SESSION['username'] = $data['name'];
-}
-
-function logUserOut()
-{
-    session_unset();
 }

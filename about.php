@@ -1,5 +1,5 @@
 <?php
-function showAboutContent()
+function showContent()
 {
     echo '<div class="aboutme">
             <p> I\'m Lydia, and I live in Leiden with my wife Lenna and our two fur babies Bobby and Kitten</p>
@@ -15,4 +15,3 @@ function showAboutContent()
     </div>
 </div>';
 }
-?>

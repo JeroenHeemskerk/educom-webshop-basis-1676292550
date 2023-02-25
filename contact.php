@@ -1,9 +1,10 @@
 <?php
+
+
 function showContactContent($data)
 {
 
-  if (!$data['valid']) { /* Show the next part only when $valid is false */
-    echo '
+  echo '
         <div class="form-style-3">
           <form method="post" action="index.php">
             <fieldset>
@@ -16,25 +17,25 @@ function showContactContent($data)
               <span class="error">' . $data["phoneErr"] . '</span>
               <label for="salutation"><span>How can we address you?</span><select name="salutation" class="select-field">
                   <option ';
-    if ($data["salutation"] === "Mrs") {
-      echo "selected";
-    }
-    echo 'value="Mrs">Mrs</option>
+  if ($data["salutation"] === "Mrs") {
+    echo "selected";
+  }
+  echo 'value="Mrs">Mrs</option>
                   <option ';
-    if ($data["salutation"] === "Ms") {
-      echo "selected";
-    }
-    echo 'value="Ms">Ms</option>
+  if ($data["salutation"] === "Ms") {
+    echo "selected";
+  }
+  echo 'value="Ms">Ms</option>
                   <option ';
-    if ($data["salutation"] === "Mx") {
-      echo "selected";
-    }
-    echo 'value="Mx">Mx</option>
+  if ($data["salutation"] === "Mx") {
+    echo "selected";
+  }
+  echo 'value="Mx">Mx</option>
                   <option ';
-    if ($data["salutation"] === "Mr") {
-      echo "selected";
-    }
-    echo 'value="Mr">Mr</option>
+  if ($data["salutation"] === "Mr") {
+    echo "selected";
+  }
+  echo 'value="Mr">Mr</option>
                 </select></label>
             </fieldset>
             <fieldset>
@@ -42,16 +43,16 @@ function showContactContent($data)
               <label for="email"><span>email</span></label>
               <input type="radio" id="email" name="contactOption" class="required"';
 
-    if ($data["contactOption"] === "email") {
-      echo "checked";
-    }
-    echo ' value="email"><br>
+  if ($data["contactOption"] === "email") {
+    echo "checked";
+  }
+  echo ' value="email"><br>
               <label for="phone"><span>phone</span></label>
               <input type="radio" id="phone" name="contactOption" class="required"';
-    if ($data["contactOption"] ===  "phone") {
-      echo "checked";
-    }
-    echo ' value="phone"><br>
+  if ($data["contactOption"] ===  "phone") {
+    echo "checked";
+  }
+  echo ' value="phone"><br>
               <span class="error">' . $data["contactOptionErr"] . '</span>
             </fieldset>
             <fieldset>
@@ -63,9 +64,12 @@ function showContactContent($data)
               <input type="hidden" name="page" value="contact">                                                
               </fieldset>
           </form>
-        </div>'
-?> <?php } else { /* Show the next part only when $valid is true */
-    echo '
+        </div>';
+}
+
+function showThankYouPage($data)
+{
+  echo '
         <p>Thank you for your reply!</p>
 
         <div>Name: ' . $data["salutation"] . " " . $data["name"] . '</div>
@@ -74,6 +78,13 @@ function showContactContent($data)
         <div>Preferred Contact Option: ' . $data["contactOption"] . '</div>
         <div>Message: ' . $data["message"] . '</div>        
     </div> ';
+}
+
+function showContent($data)
+{
+  if ($data['valid'] === true) {
+    showThankYouPage($data);
+  } else {
+    showContactContent($data);
   }
 }
-    ?>

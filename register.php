@@ -1,5 +1,5 @@
 <?php
-function showRegisterContent($data)
+function showContent($data)
 {
     echo '
         <div class="form-style-3">

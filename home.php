@@ -1,5 +1,5 @@
 <?php
-function showHomeContent() {
+function showContent() {
     echo '<hr>
     <div class="introduction">
       <h2>All this stuff is just to practice</h2>
