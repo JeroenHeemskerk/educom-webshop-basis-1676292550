@@ -1,6 +1,5 @@
 <?php
 
-
 function showContactContent($data)
 {
 
@@ -67,23 +66,11 @@ function showContactContent($data)
         </div>';
 }
 
-function showThankYouPage($data)
-{
-  echo '
-        <p>Thank you for your reply!</p>
-
-        <div>Name: ' . $data["salutation"] . " " . $data["name"] . '</div>
-        <div>Email: ' . $data["email"] . ' </div>
-        <div>Phone: ' . $data["phone"] . '</div>
-        <div>Preferred Contact Option: ' . $data["contactOption"] . '</div>
-        <div>Message: ' . $data["message"] . '</div>        
-    </div> ';
-}
-
 function showContent($data)
 {
   if ($data['valid'] === true) {
-    showThankYouPage($data);
+    include('thanks.php');
+    showThankYouContent($data);
   } else {
     showContactContent($data);
   }

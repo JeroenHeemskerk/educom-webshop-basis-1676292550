@@ -52,9 +52,7 @@ function processRequest($page)
             break;
         case 'contact':
             $data = validateContact();
-            if ($data['valid']) {
-                $page = 'contact';
-            }
+            $page = 'contact';
             break;
         case 'register':
             $data = validateRegistration();
