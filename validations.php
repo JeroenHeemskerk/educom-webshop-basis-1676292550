@@ -1,5 +1,7 @@
 <?php
 
+include 'user_service.php';
+
 // secure the user input
 function test_input($data)
 {
@@ -111,29 +113,15 @@ function validateRegistration()
         // Check if email is already in use, if not: create new user
 
         if ($name !== "" && $email !== "" && $password !== "" && $confirmPassword !== "" && $nameErr === "" && $emailErr === "" && $passwordErr === "" && $confirmPasswordErr === "") {
-            $users_file = fopen("./users/users.txt", "r");
-            while (!feof($users_file)) {
-                $user = fgets($users_file);
-                if (stripos(
-                    $user,
-                    $email
-                ) !== false) {
-                    $emailErr = "An account with this email is already in use";
-                }
+
+            if (doesEmailExist($email) == true) {
+                $emailErr = "An account with this email is already in use";
             }
-            fclose($users_file);
 
             if ($emailErr === "") {
                 $valid = true;
-
-                $users_file = fopen("./users/users.txt", "a");
-                $new_user = "$email|$name|$password\n";
-                fwrite(
-                    $users_file,
-                    $new_user
-                );
-                fclose($users_file);
-                header("location: index.php?page=login");
+                storeUser($email, $name, $password);
+                // header("location: index.php?page=login");
             }
         }
     }
@@ -169,21 +157,16 @@ function validateLogin()
         // check if all data are valid
         // set username of logged in user
         if ($email !== "" && $password !== "" && $emailErr === "" && $passwordErr === "") {
-            $users_file = fopen("./users/users.txt", "r");
-            while (!feof($users_file)) {
-                $user = fgets($users_file);
-                $user_data = explode("|", $user);
-                if ($email === $user_data[0] && $password === trim($user_data[2])) {
-                    $emailErr = "";
-                    $passwordErr = "";
-                    $name = $user_data[1];
+            $authenticate = authenticateUser($email, $password);
+            switch ($authenticate['result']) {
+                case RESULT_OK:
                     $valid = true;
+                    $name = $authenticate['user']['name'];
                     break;
-                } else {
-                    $emailErr = "Email not found or password incorrect";
-                }
+                case RESULT_WRONG:
+                    $emailErr = "Email does not exist or password does not match";
+                    break;
             }
-            fclose($users_file);
         }
     }
 

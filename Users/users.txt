@@ -10,3 +10,9 @@ nogeen@email.nl|Bo Burnham|123
 bob@eigenemail.nu|Bobby|123
 kit@ookeenemail.nl|Kitten|456
 co@co.nl|Coby|123
+persoon@mail.com|persoon|123
+tester@v.com|Lydia van Gammeren|123
+rem@art.com|rembrandt|123
+beertje@boem.nl|beer|123
+panda@zeldzaam.nl|panda|123
+wasbeer@leuk.nl|wasbeer|123

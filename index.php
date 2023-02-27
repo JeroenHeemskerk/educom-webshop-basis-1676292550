@@ -4,9 +4,10 @@
 // Main App
 // =================================================================
 
-session_start();
 include 'validations.php';
 include 'session_manager.php';
+session_start();
+
 $page = getRequestedPage();
 $data = processRequest($page);
 showResponsePage($data);
@@ -121,7 +122,7 @@ function showBody($current_page, $data)
 {
     showBodyStart();
     showHeader($current_page);
-    showMenu($data);
+    showMenu();
     showContent($data);
     showFooter();
     showBodyEnd();
@@ -155,26 +156,36 @@ function showHeader($page)
 }
 
 function showMenu()
+
 {
-    echo '<nav>
-    <ul class="menu">
-    <a href="index.php?page=home">
-    <li>HOME</li>
-    </a>
-    <a href="index.php?page=about">
-    <li>ABOUT</li>
-    </a>    
-    <a href="index.php?page=contact">
-    <li>CONTACT</li> 
-    </a>   
-    <a href="index.php?page=register">
-    <li>REGISTER</li> 
-    </a>  
-    <a href="index.php?page=login">
-    <li>LOGIN</li> 
-    </a>       
-    </ul>
-</nav>';
+    $pages = ['home', 'about', 'contact', 'register', 'login', 'logout'];
+    echo '<ul class="menu"><nav>';
+
+    foreach ($pages as $page) {
+        if ($page === 'logout') {
+            if (isset($_SESSION['username'])) {
+                echo '
+                    <a
+                    href="index.php?page=' . $page . '"
+                    ><li>' . strtoupper($page) . " " . strtoupper($_SESSION['username'])  . '</li></a>';
+            }
+        } elseif ($page === 'login' || $page === 'register') {
+            if (!isset($_SESSION['username'])) {
+                echo '
+                    <a
+                    href="index.php?page=' . $page . '"
+                    ><li>' . strtoupper($page) .  '</li></a>
+                    ';
+            }
+        } else {
+            echo '
+                <a
+                href="index.php?page=' . $page . '"
+                ><li>' . strtoupper($page) . '</li></a>
+                 ';
+        }
+    };
+    echo "</nav></ul>";
 }
 
 function showFooter()
